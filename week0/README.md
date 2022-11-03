@@ -1,7 +1,7 @@
 ### Week 0 tasks
 
-Let's work with arrays, functions, objects and Node fs, proccess.ENV
-All tasks in each file, with comments what you need to do.
+##### Let's work with arrays, functions, objects and Node fs, proccess.ENV.
+###### All tasks in each file, with comments what you need to do.
 
 ### This may help
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
