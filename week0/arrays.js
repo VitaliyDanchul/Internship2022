@@ -64,7 +64,7 @@ console.log({
  * 7. Calculate array sum
  */
 
-const sum = myArray.reduce();
+const sum = myArray.YOUR_METHOD; // 8)
 
 console.log({
     sum,
