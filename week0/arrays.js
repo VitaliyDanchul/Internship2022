@@ -1,12 +1,12 @@
 const myArray = [1, 10, 3, 6, 'ArrayElement'];
 
 /**
- * 1. Log to console 3 and '{}'
+ * 1. Log 3 and 6 elements from myArray to console
  * Please, use more than on solution
  */
 
 // console.log(`3: ${}`);
-// console.log(`{}: ${}`);
+// console.log(`6: ${}`);
 
 /**
  *  2. Log type of each element
