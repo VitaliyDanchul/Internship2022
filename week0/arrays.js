@@ -2,18 +2,24 @@ const myArray = [1, 10, 3, 6, 'ArrayElement'];
 
 /**
  * 1. Log 3 and 6 elements from myArray to console
- * Please, use more than on solution
+ * Please, use more than one solution
  */
 
-// console.log(`3: ${}`);
-// console.log(`6: ${}`);
+console.log('Access elements via index:');
+console.log(`3: ${myArray[2]}`);
+console.log(`6: ${myArray[3]}`);
+
+console.log('Access elements via find() method:');
+console.log(`3: ${myArray.find(element => element === 3)}`);
+console.log(`6: ${myArray.find(element => element === 6)}`);
 
 /**
  *  2. Log type of each element
  */
 
-myArray.forEach(() => {
-    console.log();
+console.log('Type of each element:');
+myArray.forEach(element => {
+    console.log(typeof element);
 });
 
 /**
@@ -21,7 +27,7 @@ myArray.forEach(() => {
  *  Should return Boolean
  */
 
-const isNumber = myArray.YOUR_METHOD;
+const isNumber = myArray.every(element => typeof element === "number");
 
 console.log({
     isNumber,
@@ -32,7 +38,7 @@ console.log({
  * Should return Boolean
  */
 
-const isBiggerThanFive = myArray.YOUR_METHOD;
+const isBiggerThanFive = myArray.some(element => element > 5);
 
 console.log({
     isBiggerThanFive,
@@ -43,7 +49,7 @@ console.log({
  * Should return another Array
  */
 
-const elementsBiggerThanFive = myArray.YOUR_METHOD;
+const elementsBiggerThanFive = myArray.filter(element => element > 5);
 
 console.log({
     elementsBiggerThanFive,
@@ -54,7 +60,7 @@ console.log({
  * Should return another Array
  */
 
-const multiplied = myArray.YOUR_METHOD;
+const multiplied = myArray.map(element => (typeof element === 'number') ? element * 2 : element);
 
 console.log({
     multiplied,
@@ -64,7 +70,7 @@ console.log({
  * 7. Calculate array sum
  */
 
-const sum = myArray.reduce();
+const sum = myArray.reduce((sum, element) => (typeof element === 'number') ? sum + element : sum, 0);
 
 console.log({
     sum,
@@ -74,8 +80,8 @@ console.log({
  * 8. Sort array in ascending and descending order
  */
 
-const asc = myArray.YOUR_METHOD;
-const desc = myArray.YOUR_METHOD;
+const asc = myArray.filter(element => typeof element === 'number').sort((a, b) => a - b);
+const desc = [...asc].reverse();
 
 console.log({
     asc,
