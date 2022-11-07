@@ -9,6 +9,10 @@ console.log('Access elements via index:');
 console.log(`3: ${myArray[2]}`);
 console.log(`6: ${myArray[3]}`);
 
+console.log('Access elements via at() method:');
+console.log(`3: ${myArray.at(2)}`);
+console.log(`6: ${myArray.at(3)}`);
+
 console.log('Access elements via find() method:');
 console.log(`3: ${myArray.find(element => element === 3)}`);
 console.log(`6: ${myArray.find(element => element === 6)}`);
@@ -60,7 +64,7 @@ console.log({
  * Should return another Array
  */
 
-const multiplied = myArray.map(element => (typeof element === 'number') ? element * 2 : element);
+const multiplied = myArray.filter(Number).map(element => element * 2);
 
 console.log({
     multiplied,
@@ -70,7 +74,7 @@ console.log({
  * 7. Calculate array sum
  */
 
-const sum = myArray.reduce((sum, element) => (typeof element === 'number') ? sum + element : sum, 0);
+const sum = myArray.filter(Number).reduce((sum, element) => sum + element, 0);
 
 console.log({
     sum,
@@ -80,7 +84,7 @@ console.log({
  * 8. Sort array in ascending and descending order
  */
 
-const asc = myArray.filter(element => typeof element === 'number').sort((a, b) => a - b);
+const asc = myArray.filter(Number).sort((a, b) => a - b);
 const desc = [...asc].reverse();
 
 console.log({

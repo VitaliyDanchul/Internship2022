@@ -10,7 +10,7 @@ function sayWho(firstName, lastName) {
 console.log(sayWho("Serhii","Hrynevych"));
 
 /**
- * 2. Write a function that accepts numbers and return their sum
+ * 2. Write a function that accepts numbers and returns their sum
  * No limits for arguments count
  */
 
