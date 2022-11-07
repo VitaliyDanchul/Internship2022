@@ -7,14 +7,14 @@ const https = require('https');
 const fs = require('fs');
 
 function getConfig(envVar) {
-  if (!process.env.NODE_ENV) {
+  if (!envVar) {
     return {
       apiLink: 'https://jsonplaceholder.typicode.com/users',
       fileName: 'users.json', 
     }
   }
 
-  const congif = {
+  const config = {
     PRODUCTION: {
       apiLink: 'https://jsonplaceholder.typicode.com/todos',
       fileName: 'todos.json',
@@ -25,27 +25,26 @@ function getConfig(envVar) {
     }
   }
 
-  return congif[envVar];
+  return config[envVar];
 }
 
-
-apiCall = getConfig(process.env.NODE_ENV);
-
-https.get(apiCall.apiLink, (resp) => {
+https.get(getConfig(process.env.NODE_ENV).apiLink, (resp) => {
   let data = '';
 
   resp.on('data', (chunk) => {
     data += chunk;
   });
 
+  let fileName = getConfig(process.env.NODE_ENV).fileName;
+
   resp.on('end', () => {
-    fs.appendFile(apiCall.fileName, data, function (err) {
+    fs.appendFile(fileName, data, function (err) {
       if (err) throw err;
-      console.log(`File ${apiCall.fileName} was created succesfully!`);
+      console.log(`File ${fileName} was created succesfully!`);
     });
   });
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
+}).on('error', (err) => {
+  console.log('Error: ' + err.message);
 });
 
 
