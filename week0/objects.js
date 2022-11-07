@@ -10,14 +10,14 @@ const invoice = {
  * 1. Log firstName and lastName in dot notation and bracket notation
  */
 
-console.log(`First name: `);
-console.log(`Last name: `);
+console.log(`First name: ${invoice.firstName}, ${invoice['firstName']}`);
+console.log(`Last name: ${invoice.lastName}, ${invoice['lastName']}`);
 
 /**
  * 2. Log Object Keys
  */
 
-const keys = invoice.YOUR_METHOD;
+const keys = Object.keys(invoice);
 
 console.log({
     keys,
@@ -27,7 +27,7 @@ console.log({
  * 3. Log Object values
  */
 
-const values = invoice.YOUR_METHOD;
+const values = Object.values(invoice);
 
 console.log({
     values,
@@ -37,7 +37,7 @@ console.log({
  * 4. Log Object entries
  */
 
-const entries = invoice.YOUR_METHOD;
+const entries = Object.entries(invoice);
 
 console.log({
     entries,
@@ -48,7 +48,7 @@ console.log({
  * Please, use more than one solution
  */
 
-const copiedInvoice = {};
+const copiedInvoice = Object.assign({}, invoice);
 
 console.log({
     copiedInvoice,
@@ -69,3 +69,7 @@ console.log({
 /**
  * 7. Loop through object and log key-values
  */
+
+for (const [key, value] of Object.entries(invoice)) {
+    console.log(`${key}: ${value}`);
+}

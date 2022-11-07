@@ -3,11 +3,11 @@
  * Should return 'I'm firstName lastName'
  */
 
-function sayWho() {
-    return '';
+function sayWho(firstName, lastName) {
+    return `I'm ${firstName} ${lastName}`;
 }
 
-console.log(sayWho());
+console.log(sayWho("Pavel", "Korolenko"));
 
 /**
  * 2. Write a function that accepts numbers and return their sum
@@ -15,6 +15,17 @@ console.log(sayWho());
  */
 
 function countSum() {
+    let sum = 0;
+
+    for (let i = 0; i < arguments.length; i++) {
+        try {
+            sum += arguments[i];
+        }
+        catch (e) {
+            console.log("Please, enter only numbers");
+        }
+    }
+
     return sum;
 }
 
@@ -27,6 +38,14 @@ console.log(countSum(1, 2));
  */
 
 function countLetters(string, letter) {
+    let result = 0;
+
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] === letter) {
+            result++;
+        }
+    }
+
     return result;
 }
 
@@ -37,7 +56,7 @@ console.log(countLetters('Node developer', 'd'));
  */
 
 function getRandom(start, end) {
-    return result;
+    return Math.floor(Math.random() * (end - start)) + start;
 }
 
 console.log(getRandom(0, 10));
