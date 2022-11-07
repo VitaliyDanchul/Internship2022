@@ -6,26 +6,30 @@
 const https = require('https');
 const fs = require('fs');
 
-let apiCall = {
-  apiLink: 'https://jsonplaceholder.typicode.com/users',
-  fileName: 'users.json', 
-}
-
 function getConfig(envVar) {
-  if (envVar === 'PRODUCTION') {
+  if (!process.env.NODE_ENV) {
     return {
+      apiLink: 'https://jsonplaceholder.typicode.com/users',
+      fileName: 'users.json', 
+    }
+  }
+
+  const congif = {
+    PRODUCTION: {
       apiLink: 'https://jsonplaceholder.typicode.com/todos',
       fileName: 'todos.json',
-    };
+    },
+    DEV: {
+      apiLink: 'https://jsonplaceholder.typicode.com/albums',
+      fileName: 'albums.json',      
+    }
   }
-  
-  return {
-    apiLink: 'https://jsonplaceholder.typicode.com/albums',
-    fileName: 'albums.json',
-  };
+
+  return congif[envVar];
 }
 
-apiCall = process.env.NODE_ENV ? getConfig(process.env.NODE_ENV) : apiCall;
+
+apiCall = getConfig(process.env.NODE_ENV);
 
 https.get(apiCall.apiLink, (resp) => {
   let data = '';
