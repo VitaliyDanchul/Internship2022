@@ -3,19 +3,19 @@
  * Should return 'I'm firstName lastName'
  */
 
-function sayWho() {
-    return '';
+function sayWho(firstName, lastName) {
+    return `I'm ${firstName} ${lastName}`;
 }
 
-console.log(sayWho());
+console.log(sayWho("Serhii","Hrynevych"));
 
 /**
- * 2. Write a function that accepts numbers and return their sum
+ * 2. Write a function that accepts numbers and returns their sum
  * No limits for arguments count
  */
 
-function countSum() {
-    return sum;
+function countSum(...numbers) {
+    return numbers.reduce((sum, element) => sum + element, 0);
 }
 
 console.log(countSum(4, 5, 23));
@@ -27,7 +27,7 @@ console.log(countSum(1, 2));
  */
 
 function countLetters(string, letter) {
-    return result;
+    return string.split(letter).length - 1;
 }
 
 console.log(countLetters('Node developer', 'd'));
@@ -37,7 +37,9 @@ console.log(countLetters('Node developer', 'd'));
  */
 
 function getRandom(start, end) {
-    return result;
+    start = Math.ceil(start);
+    end = Math.floor(end);
+    return Math.floor(Math.random() * (end - start) + start);
 }
 
 console.log(getRandom(0, 10));
