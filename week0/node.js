@@ -6,14 +6,19 @@
 const fs = require("fs");
 const axios = require("axios");
 
-const request = async (url, fileName) => {
-  await axios.get(url).then((response) => {
-    fs.writeFile(fileName, JSON.stringify(response.data), (err) => {
-      if (err) {
-        console.log(err);
-      }
+const request = (url, fileName) => {
+  try {
+    axios.get(url).then((response) => {
+      fs.writeFile(fileName, JSON.stringify(response.data), (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
     });
-  });
+  }
+  catch (error) {
+    console.log(error);
+  }
 };
 
 request("https://jsonplaceholder.typicode.com/users", "users.json");
