@@ -18,18 +18,13 @@ function countSum() {
     let sum = 0;
 
     for (let i = 0; i < arguments.length; i++) {
-        try {
-            sum += arguments[i];
-        }
-        catch (e) {
-            console.log("Please, enter only numbers");
-        }
+        sum += typeof arguments[i] === 'number' ? arguments[i] : 0;
     }
 
     return sum;
 }
 
-console.log(countSum(4, 5, 23));
+console.log(countSum(4, 5, 23, "asd", {}));
 console.log(countSum(10, 50, 212, 300, 22));
 console.log(countSum(1, 2));
 

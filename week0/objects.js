@@ -70,6 +70,11 @@ console.log({
  * 7. Loop through object and log key-values
  */
 
+console.log("\n// For of loop");
 for (const [key, value] of Object.entries(invoice)) {
     console.log(`${key}: ${value}`);
+}
+console.log("\n// For in loop");
+for (const key in invoice) {
+    console.log(`${key}: ${invoice[key]}`);
 }

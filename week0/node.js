@@ -6,18 +6,17 @@
 const fs = require("fs");
 const axios = require("axios");
 
-axios
-  .get("https://jsonplaceholder.typicode.com/users")
-  .then((response) => {
-    fs.writeFile("users.json", JSON.stringify(response.data), (err) => {
+const request = async (url, fileName) => {
+  await axios.get(url).then((response) => {
+    fs.writeFile(fileName, JSON.stringify(response.data), (err) => {
       if (err) {
         console.log(err);
       }
     });
-  })
-  .catch((error) => {
-    console.log(error);
   });
+};
+
+request("https://jsonplaceholder.typicode.com/users", "users.json");
 
 /**
  * 2. Let's work with running node script with some environment variables
@@ -29,29 +28,9 @@ axios
 const env = process.env.ENV || "DEV";
 
 if (env === "PRODUCTION") {
-  axios
-    .get("https://jsonplaceholder.typicode.com/todos")
-    .then((response) => {
-      fs.writeFile("todos.json", JSON.stringify(response.data), (err) => {
-        if (err) {
-          console.log(err);
-        }
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  request("https://jsonplaceholder.typicode.com/todos", "todos.json");
 } else if (env === "DEV") {
-  axios
-    .get("https://jsonplaceholder.typicode.com/albums")
-    .then((response) => {
-      fs.writeFile("albums.json", JSON.stringify(response.data), (err) => {
-        if (err) {
-          console.log(err);
-        }
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  request("https://jsonplaceholder.typicode.com/albums", "albums.json");
+} else {
+  console.log("Wrong environment variable");
 }
