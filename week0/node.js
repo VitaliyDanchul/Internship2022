@@ -3,7 +3,6 @@
  * todo: install module to call this API, and use node FS module
  */
 
-
 /**
  * 2. Let's work with running node script with some environment variables
  * todo: Pass parameter ENV when you run this script. 
