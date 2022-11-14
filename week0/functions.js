@@ -7,7 +7,7 @@ function sayWho(firstName, lastName) {
     return `I'm ${firstName} ${lastName}`;
 }
 
-console.log(sayWho("Serhii","Hrynevych"));
+console.log(sayWho('Serhii', 'Hrynevych'));
 
 /**
  * 2. Write a function that accepts numbers and returns their sum
@@ -37,9 +37,10 @@ console.log(countLetters('Node developer', 'd'));
  */
 
 function getRandom(start, end) {
-    start = Math.ceil(start);
-    end = Math.floor(end);
-    return Math.floor(Math.random() * (end - start) + start);
+    const ceiledStart = Math.ceil(start);
+    const ceiledEnd = Math.floor(end);
+
+    return Math.floor(Math.random() * (ceiledEnd - ceiledStart) + ceiledStart);
 }
 
 console.log(getRandom(0, 10));

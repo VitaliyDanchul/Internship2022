@@ -14,15 +14,15 @@ console.log(`3: ${myArray.at(2)}`);
 console.log(`6: ${myArray.at(3)}`);
 
 console.log('Access elements via find() method:');
-console.log(`3: ${myArray.find(element => element === 3)}`);
-console.log(`6: ${myArray.find(element => element === 6)}`);
+console.log(`3: ${myArray.find((element) => element === 3)}`);
+console.log(`6: ${myArray.find((element) => element === 6)}`);
 
 /**
  *  2. Log type of each element
  */
 
 console.log('Type of each element:');
-myArray.forEach(element => {
+myArray.forEach((element) => {
     console.log(typeof element);
 });
 
@@ -31,7 +31,7 @@ myArray.forEach(element => {
  *  Should return Boolean
  */
 
-const isNumber = myArray.every(element => typeof element === "number");
+const isNumber = myArray.every((element) => typeof element === 'number');
 
 console.log({
     isNumber,
@@ -42,7 +42,7 @@ console.log({
  * Should return Boolean
  */
 
-const isBiggerThanFive = myArray.some(element => element > 5);
+const isBiggerThanFive = myArray.some((element) => element > 5);
 
 console.log({
     isBiggerThanFive,
@@ -53,7 +53,7 @@ console.log({
  * Should return another Array
  */
 
-const elementsBiggerThanFive = myArray.filter(element => element > 5);
+const elementsBiggerThanFive = myArray.filter((element) => element > 5);
 
 console.log({
     elementsBiggerThanFive,
@@ -64,7 +64,7 @@ console.log({
  * Should return another Array
  */
 
-const multiplied = myArray.filter(Number).map(element => element * 2);
+const multiplied = myArray.filter(Number).map((element) => element * 2);
 
 console.log({
     multiplied,
@@ -74,7 +74,7 @@ console.log({
  * 7. Calculate array sum
  */
 
-const sum = myArray.filter(Number).reduce((sum, element) => sum + element, 0);
+const sum = myArray.filter(Number).reduce((sumOfElements, element) => sumOfElements + element, 0);
 
 console.log({
     sum,
