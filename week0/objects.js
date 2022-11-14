@@ -10,14 +10,14 @@ const invoice = {
  * 1. Log firstName and lastName in dot notation and bracket notation
  */
 
-console.log(`First name: `);
-console.log(`Last name: `);
+console.log(`First name: ${invoice.firstName}`);
+console.log(`Last name: ${invoice.lastName}`);
 
 /**
  * 2. Log Object Keys
  */
 
-const keys = invoice.YOUR_METHOD;
+const keys = Object.keys(invoice);;
 
 console.log({
     keys,
@@ -27,7 +27,7 @@ console.log({
  * 3. Log Object values
  */
 
-const values = invoice.YOUR_METHOD;
+const values = Object.values(invoice);
 
 console.log({
     values,
@@ -37,7 +37,7 @@ console.log({
  * 4. Log Object entries
  */
 
-const entries = invoice.YOUR_METHOD;
+const entries = Object.entries(invoice);
 
 console.log({
     entries,
@@ -48,10 +48,22 @@ console.log({
  * Please, use more than one solution
  */
 
-const copiedInvoice = {};
+// using spread ...
+let copiedInvoice1 = {
+    ...invoice
+};
+
+// using  Object.assign() method
+let copiedInvoice2 = Object.assign({}, invoice);
+
+// using JSON
+let copiedInvoice3 = JSON.parse(JSON.stringify(invoice));
+
 
 console.log({
-    copiedInvoice,
+    copiedInvoice1,
+    copiedInvoice2,
+    copiedInvoice3
 });
 
 /**
@@ -59,13 +71,17 @@ console.log({
  * Important: original invoice amount shouldnt be modified
  */
 
-copiedInvoice.amount = 300;
+copiedInvoice1.amount = 300;
 
 console.log({
     invoice,
-    copiedInvoice,
+    copiedInvoice1,
 });
 
 /**
  * 7. Loop through object and log key-values
  */
+
+for (let [key, value] of Object.entries(invoice)) {
+    console.log(`${key}-${value}`);
+}
