@@ -16,7 +16,13 @@ function findAll() {
  */
 function create(req) {
     const { name, surname } = req;
-    const id = users.length + 1;
+    let id = users.length + 1;
+
+    if (users.find((user) => user.id === id)) {
+        const maxId = Math.max(...users.map((user) => user.id));
+
+        id = maxId + 1;
+    }
 
     if (!name || !surname) {
         throw new Error('Name and surname are required');
