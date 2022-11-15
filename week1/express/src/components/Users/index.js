@@ -6,7 +6,7 @@ async function findAllUsers(req, res) {
 
         return res.status(200).json({
             data: users,
-            message: 'find all users'
+            message: 'find all users',
         });
     } catch (error) {
         return res.status(500).json({
@@ -22,14 +22,15 @@ async function createUser(req, res) {
 
         if (!name || !email) {
             return res.status(400).send({
-                message: 'bad request'
+                message: 'bad request',
             });
         }
 
         const checkEmail = await UsersService.findUserByEmail(email);
+
         if (checkEmail) {
             return res.status(400).send({
-                message: 'such user already created'
+                message: 'such user already created',
             });
         }
 
@@ -37,7 +38,7 @@ async function createUser(req, res) {
 
         return res.status(201).json({
             data: user,
-            message: 'user created'
+            message: 'user created',
         });
     } catch (error) {
         return res.status(500).json({
@@ -52,15 +53,16 @@ async function findUser(req, res) {
         const { id } = req.params;
 
         const user = await UsersService.findUser(+id);
+
         if (!user) {
             return res.status(404).send({
-                message: 'user not found'
+                message: 'user not found',
             });
         }
 
         return res.status(200).json({
             data: user,
-            message: 'user finded'
+            message: 'user finded',
         });
     } catch (error) {
         return res.status(500).json({
@@ -75,9 +77,10 @@ async function deleteUser(req, res) {
         const { id } = req.params;
 
         const user = await UsersService.findUser(+id);
+
         if (!user) {
             return res.status(404).send({
-                message: 'user not found'
+                message: 'user not found',
             });
         }
 
@@ -85,7 +88,7 @@ async function deleteUser(req, res) {
 
         return res.status(200).json({
             data: user,
-            message: 'user deleted'
+            message: 'user deleted',
         });
     } catch (error) {
         return res.status(500).json({
@@ -101,9 +104,10 @@ async function updateUser(req, res) {
         const { name, email } = req.body;
 
         const user = await UsersService.findUser(+id);
+
         if (!user) {
             return res.status(404).send({
-                message: 'user not found'
+                message: 'user not found',
             });
         }
 
@@ -111,7 +115,7 @@ async function updateUser(req, res) {
 
         return res.status(200).json({
             data: userUpdated,
-            message: 'user updated'
+            message: 'user updated',
         });
     } catch (error) {
         return res.status(500).json({
@@ -125,7 +129,6 @@ module.exports = {
     updateUser,
     findAllUsers,
     createUser,
-    deleteUser,
-    updateUser,
     findUser,
+    deleteUser,
 };

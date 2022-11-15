@@ -9,6 +9,7 @@ module.exports = {
         sourceType: 'module',
     },
     rules: {
+        'no-param-reassign': 0,
         indent: ['error', 4],
         'no-console': ['error', {
             allow: ['warn', 'error', 'log'],
