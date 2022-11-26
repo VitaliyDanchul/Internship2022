@@ -1,5 +1,4 @@
 const http = require('http');
-
 const server = require('./server');
 const events = require('./events');
 

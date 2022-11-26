@@ -5,24 +5,21 @@ function findAll() {
 }
 
 function findById(userId) {
-    return users.find(({ id }) => Number(userId) === id);
+    return users.find(({ id }) => userId === id);
 }
 
-/**
- *  Leave create service method for future, when we will connect mongo,
- *  we will do manipulations here
- */
 function create(user) {
     users.push(user);
 
-    return users;
+    return user;
 }
 
-function update(userId, user) {
-    return {
-        ...users[userId],
-        ...user,
-    };
+function update(id, user) {
+    const userIndex = users.findIndex(((currentUser) => currentUser.id === id));
+
+    users[userIndex] = { ...user };
+
+    return user;
 }
 
 function deleteById(userId) {
