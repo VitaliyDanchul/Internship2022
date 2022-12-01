@@ -8,8 +8,8 @@ const catchError = require('../../utils/catchError');
 const AppError = require('../../utils/appError');
 const {
     userValidator,
-} = require('../../validators/user');
-const UserDto = require('../../dtos/user');
+} = require('./validators/user');
+const UserDto = require('./dtos/user');
 
 const signin = catchError(async (req, res) => {
     if (userValidator.validate(req.body).error) {
