@@ -8,8 +8,8 @@ const catchError = require('../../utils/catchError');
 const AppError = require('../../utils/appError');
 const {
     userValidator,
-} = require('./validators/user');
-const UserDto = require('./dtos/user');
+} = require('./validator');
+const UserDto = require('./dto');
 
 const signin = catchError(async (req, res) => {
     if (userValidator.validate(req.body).error) {
@@ -31,10 +31,15 @@ const signin = catchError(async (req, res) => {
 
 const create = catchError(async (req, res) => {
     if (userValidator.validate(req.body).error) {
-        throw new AppError(httpStatus.BAD_REQUEST, userValidator.validate(req.body).error.details);
+        throw new AppError(httpStatus.BAD_REQUEST, userValidator.validate(req.body).error.details.message);
     }
 
-    const { name, email, password } = req.body;
+    const {
+        firstName,
+        lastName,
+        email,
+        password,
+    } = req.body;
 
     const oldUser = await UsersService.findOne({ email });
 
@@ -45,7 +50,8 @@ const create = catchError(async (req, res) => {
     const encryptedPassword = await bcrypt.hash(password, 10);
 
     const user = await UsersService.create({
-        name,
+        firstName,
+        lastName,
         email: email.toLowerCase(),
         password: encryptedPassword,
     });
@@ -66,7 +72,7 @@ const findAll = catchError(async (req, res) => {
 const findOne = catchError(async (req, res) => {
     const { id } = req.params;
 
-    const user = await UsersService.findOne(id);
+    const user = await UsersService.findById(id);
 
     return res.json({ data: user, status: 'success' });
 });

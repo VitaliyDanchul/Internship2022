@@ -2,7 +2,11 @@ const Joi = require('joi');
 
 exports.userValidator = Joi.object()
     .keys({
-        username: Joi.string()
+        firstName: Joi.string()
+            .min(3)
+            .max(50)
+            .required(),
+        lastName: Joi.string()
             .min(3)
             .max(50)
             .required(),

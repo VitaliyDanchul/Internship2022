@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('../config/database').connect();
+require('../config/mongoConnection').connect();
 const express = require('express');
 const morgan = require('morgan');
 
