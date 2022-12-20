@@ -1,3 +1,5 @@
+const DemoModel = require('./model');
+
 function findAll() {
     return [];
 }
@@ -6,7 +8,11 @@ function findAll() {
  *  Leave create service method for future, when we will connect mongo,
  *  we will do manipulations here
  */
-function create() {
+async function create(data) {
+    await DemoModel.create({
+        property: 'hello',
+    });
+
     return {
         message: 'Created',
     };
