@@ -51,8 +51,6 @@ https://www.postman.com/
 
 ### Week 1.4 task
 
-### Week 1.4 task
-
  1. Create Component Tasks
  2. Tasks will be protected by JWT Header Authorization (that you retrieve on sign-in action)
  3. Tasks model fields:
@@ -115,5 +113,5 @@ Response:
 
 
 Useful links:
-https://www.mongodb.com/docs/manual/meta/aggregation-quick-reference/
-https://studio3t.com/knowledge-base/articles/mongodb-aggregation-framework/
+ - https://www.mongodb.com/docs/manual/meta/aggregation-quick-reference/
+ - https://studio3t.com/knowledge-base/articles/mongodb-aggregation-framework/
