@@ -3,6 +3,8 @@ const users = [
         id: 1,
         name: 'John',
         surname: 'Doe',
+        email: 'asd@gmail.com',
+        password: '12345678',
     },
 ];
 
@@ -14,8 +16,7 @@ function findAll() {
  *  Leave create service method for future, when we will connect mongo,
  *  we will do manipulations here
  */
-function create(req) {
-    const { name, surname } = req;
+function create(name, surname, email, password) {
     let id = users.length + 1;
 
     if (users.find((user) => user.id === id)) {
@@ -24,36 +25,22 @@ function create(req) {
         id = maxId + 1;
     }
 
-    if (!name || !surname) {
-        throw new Error('Name and surname are required');
-    }
-
     users.push({
         id,
         name,
         surname,
+        email,
+        password
     });
 
     return users;
 }
 
-function findById(req) {
-    const { id } = req;
-
-    if (!id) {
-        throw new Error('Id is required');
-    }
-
-    return users.find((user) => user.id === id);
+function findById(id) {
+    return users.find((user) => user.id == id);
 }
 
-function update(req) {
-    const { id, name, surname } = req;
-
-    if (!id) {
-        throw new Error('Id is required');
-    }
-
+function update(id, name, surname) {
     const user = users.find((user) => user.id === id);
 
     if (!user) {
@@ -71,14 +58,8 @@ function update(req) {
     return user;
 }
 
-function deleteById(req) {
-    const { id } = req;
-
-    if (!id) {
-        throw new Error('Id is required');
-    }
-
-    const user = users.find((user) => user.id === id);
+function deleteById(id) {
+    const user = users.find((user) => user.id == id);
 
     if (!user) {
         throw new Error('User not found');
@@ -87,6 +68,20 @@ function deleteById(req) {
     users.splice(users.indexOf(user), 1);
 
     return users;
+}
+
+function signin(email, password) {
+    const user = users.find((user) => user.email === email);
+
+    if (!user) {
+        throw new Error('User not found');
+    }
+
+    if (user.password !== password) {
+        throw new Error('Wrong password');
+    }
+
+    return user;
 }
 
 module.exports = {
