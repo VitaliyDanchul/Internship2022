@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const UsersComponent = require('./index');
 const schemas = require('./schemas'); 
-const middleware = require('./middleware'); 
+const { middleware, authMiddleware } = require('../../untils/middleware');
 
 const router = Router();
 
@@ -11,7 +11,7 @@ router.delete('/:id', UsersComponent.deleteById)
 router.post('/create', middleware(schemas.userPOST), UsersComponent.create);
 router.put('/update', middleware(schemas.userPUT), UsersComponent.update);
 
-router.post('/signin', middleware(schemas.userPOST), UsersComponent.signin);
-router.get('/account', UsersComponent.account);
+router.post('/sign-in', middleware(schemas.userlogin), UsersComponent.signin);
+router.post('/account', authMiddleware, UsersComponent.account);
 
 module.exports = router;

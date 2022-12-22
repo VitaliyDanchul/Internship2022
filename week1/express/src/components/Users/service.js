@@ -1,43 +1,29 @@
-const users = [
-    {
-        id: 1,
-        name: 'John',
-        surname: 'Doe',
-        email: 'asd@gmail.com',
-        password: '12345678',
-    },
-];
+const User = require('./model');
 
 function findAll() {
-    return users;
+    return User.find();
 }
 
 /**
  *  Leave create service method for future, when we will connect mongo,
  *  we will do manipulations here
  */
+
+function findOne(query) {
+    return User.findOne(query);
+}
+
 function create(name, surname, email, password) {
-    let id = users.length + 1;
-
-    if (users.find((user) => user.id === id)) {
-        const maxId = Math.max(...users.map((user) => user.id));
-
-        id = maxId + 1;
-    }
-
-    users.push({
-        id,
+    return User.create({
         name,
         surname,
         email,
-        password
+        password,
     });
-
-    return users;
 }
 
 function findById(id) {
-    return users.find((user) => user.id == id);
+    return User.findById(id);
 }
 
 function update(id, name, surname) {
@@ -90,4 +76,5 @@ module.exports = {
     findById,
     update,
     deleteById,
+    findOne,
 };

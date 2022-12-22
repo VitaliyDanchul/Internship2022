@@ -1,10 +1,8 @@
 const UsersService = require("./service");
-const Joi = require("joi");
-//import middleware
-const middleware = require("./middleware");
-//import schemas
+const { middleware } = require("../../untils/middleware");
 const schemas = require("./schemas");
-
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 async function findAll(req, res) {
     try {
@@ -14,7 +12,7 @@ async function findAll(req, res) {
             data: users,
         });
     } catch (error) {
-        return res.status(500).json({
+        return res.status(422).json({
             error: error.message,
             details: null,
         });
@@ -31,13 +29,29 @@ async function create(req, res) {
 
         const { name, surname, email, password } = req.body;
 
-        const users = await UsersService.create(name, surname, email, password);
+        const user = await UsersService.findOne({
+            email,
+        });
+
+        if (user) {
+            throw new Error("User with this email already exists");
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const users = await UsersService.create(
+            name,
+            surname,
+            email,
+            hashedPassword
+        );
 
         return res.status(201).json({
             data: users,
         });
     } catch (error) {
-        return res.status(500).json({
+        return res.status(422).json({
             error: error.message,
             details: null,
         });
@@ -58,7 +72,7 @@ async function findById(req, res) {
             data: user,
         });
     } catch (error) {
-        return res.status(500).json({
+        return res.status(422).json({
             error: error.message,
             details: null,
         });
@@ -85,7 +99,7 @@ async function update(req, res) {
             data: user,
         });
     } catch (error) {
-        return res.status(500).json({
+        return res.status(422).json({
             error: error.message,
             details: null,
         });
@@ -106,7 +120,7 @@ async function deleteById(req, res) {
             data: users,
         });
     } catch (error) {
-        return res.status(500).json({
+        return res.status(422).json({
             error: error.message,
             details: null,
         });
@@ -123,13 +137,51 @@ async function signin(req, res) {
 
         const { email, password } = req.body;
 
-        const user = await UsersService.signin(email, password);
+        const user = await UsersService.findOne({ email });
+
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        const validPassword = await bcrypt.compare(password, user.password);
+
+        if (!validPassword) {
+            throw new Error("Invalid password");
+        }
+
+        const token = jwt.sign(
+            {
+                id: user._id,
+                name: user.name,
+                surname: user.surname,
+                email: user.email,
+            },
+            process.env.JWT_ACCESS_SECRET_KEY,
+            {
+                expiresIn: "1h",
+            }
+        );
+
+        return res.status(200).json({
+            token,
+        });
+    } catch (error) {
+        return res.status(422).json({
+            error: error.message,
+            details: null,
+        });
+    }
+}
+
+function account(req, res) {
+    try {
+        const { user } = req;
 
         return res.status(200).json({
             data: user,
         });
     } catch (error) {
-        return res.status(500).json({
+        return res.status(422).json({
             error: error.message,
             details: null,
         });
@@ -143,4 +195,5 @@ module.exports = {
     update,
     deleteById,
     signin,
+    account,
 };
