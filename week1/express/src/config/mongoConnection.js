@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { MONGO_URI } = process.env;
 
-exports.connect = () => new Promise(async (resolve) => {
+exports.connect = () => new Promise((resolve) => {
     mongoose.connection.on('connected', () => {
         console.log('Database has connected successfully.');
     });
@@ -10,7 +10,7 @@ exports.connect = () => new Promise(async (resolve) => {
         console.error(' Obs! There was an unexpected error connecting to the database.', error);
     });
 
-    await mongoose.connect(MONGO_URI, {
+    mongoose.connect(MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         keepAlive: true,

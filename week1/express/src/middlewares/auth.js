@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const catchError = require('../utils/catchError');
 const AppError = require('../utils/appError');
-const TokenService = require('../components/Token/service');
+const TokenService = require('../components/Token/tokenService');
 
 module.exports = catchError((req, res, next) => {
     try {

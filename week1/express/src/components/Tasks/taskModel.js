@@ -1,26 +1,28 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
-    firstName: {
+const TaskSchema = new mongoose.Schema({
+    assignee: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    title: {
         type: String,
         required: true,
         minlength: 3,
         maxlength: 50,
     },
-    lastName: {
+    description: {
         type: String,
         required: true,
         minlength: 3,
-        maxlength: 50,
+        maxlength: 100,
     },
-    email: {
-        type: String,
+    estimatedTime: {
+        type: Number,
         required: true,
-        minlength: 5,
-        maxlength: 255,
-        unique: true,
     },
-    password: {
+    createdBy: {
         type: String,
         required: true,
         minlength: 3,
@@ -32,4 +34,4 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Task', TaskSchema);
