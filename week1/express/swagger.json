@@ -1,0 +1,46 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Onix Internship",
+        "description": "REST API swagger documentation",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/v1",
+    "tags": [{
+        "name": "Demo",
+        "description": "Demo description"
+    }],
+    "paths": {
+        "/demo": {
+            "get": {
+                "tags": ["Demo"],
+                "summary": "Demo path",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Demo"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Demo": {
+            "properties": {
+                "testProperty": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"]
+}
