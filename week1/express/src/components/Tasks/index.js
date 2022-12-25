@@ -41,7 +41,7 @@ const update = async (req, res) => {
 
 const findAll = async (req, res) => {
     try {
-        const tasks = await TaskService.findAll(req.query);
+        const tasks = await TaskService.findAll(req);
         return res.status(200).send(tasks);
     } catch (ex) {
         res.status(422).json({
